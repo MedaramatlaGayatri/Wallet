@@ -10,5 +10,9 @@ public class CurrencyEqualityTest {
         Currency rupee = new Currency(72.74, "Rupee");
         Currency dollar = new Currency(1.00, "Dollar");
 
+        CurrencyEquality currencyequality = new CurrencyEquality(rupee, dollar);
+        Boolean actualEquality = currencyequality.isEqual();
+
+        assertEquals(true, actualEquality);
     }
 }
