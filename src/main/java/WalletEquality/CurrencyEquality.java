@@ -25,7 +25,7 @@ public class CurrencyEquality {
     public Boolean isEqual() {
         if (currency1.getType().equals("Dollar")) {
             double currency2Amount = currency2.getAmount();
-            return convertRupeeIntoDollar().equals(String.valueOf(currency2Amount));
+            return convertRupeeIntoDollar().equals(String.format("%.2f", currency2Amount));
         } else if (currency1.getType().equals("Rupee")) {
             double currency2Amount = currency2.getAmount();
             return convertDollarIntoRupee().equals(String.format("%.2f", currency2Amount));

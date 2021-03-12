@@ -1,13 +1,28 @@
 package WalletEquality;
 
 public class Currency {
-    final double amount;
-    final String type;
+    private double amount;
+    private String type;
     static double dollarValueInRupee = 72.74;
 
-    public Currency(double amount, String type) {
-        this.amount = amount;
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String setAmount(double amount) {
+        try {
+            if (!checkForNegativeCurrencyValueException(amount))
+                this.amount = amount;
+        } catch (NegativeCurrencyValueException e) {
+            return e.getMessage();
+        }
+        return "";
+    }
+
+    private boolean checkForNegativeCurrencyValueException(double amount) throws NegativeCurrencyValueException {
+        if (amount < 0)
+            throw new NegativeCurrencyValueException("Currency Does not Support Negative Values");
+        return false;
     }
 
     public double getAmount() {
