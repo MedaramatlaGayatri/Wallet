@@ -1,0 +1,4 @@
+WalletEquality/Currency.java
+ WalletEquality.Currency
+WalletEquality/CurrencyEquality.java
+ WalletEquality.CurrencyEquality

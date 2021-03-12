@@ -1,0 +1,2 @@
+WalletEquality/CurrencyEqualityTest.java
+ WalletEquality.CurrencyEqualityTest
