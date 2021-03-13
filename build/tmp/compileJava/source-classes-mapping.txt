@@ -1,8 +1,10 @@
+Wallet/InSufficientBalanceException.java
+ Wallet.InSufficientBalanceException
 Wallet/NegativeCurrencyValueException.java
  Wallet.NegativeCurrencyValueException
+Wallet/ZeroDepositOrWithdrawException.java
+ Wallet.ZeroDepositOrWithdrawException
 Wallet/Currency.java
  Wallet.Currency
-Wallet/ZeroDepositException.java
- Wallet.ZeroDepositException
 Wallet/Wallet.java
  Wallet.Wallet

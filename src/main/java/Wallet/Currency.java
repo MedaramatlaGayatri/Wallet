@@ -11,7 +11,7 @@ public class Currency {
 
     public String setAmount(double amount) {
         try {
-            if (!checkForNegativeCurrencyValueException(amount))
+            if (!checkForNegativeCurrencyValue(amount))
                 this.amount = amount;
         } catch (NegativeCurrencyValueException e) {
             return e.getMessage();
@@ -19,7 +19,7 @@ public class Currency {
         return "";
     }
 
-    private boolean checkForNegativeCurrencyValueException(double amount) throws NegativeCurrencyValueException {
+    private boolean checkForNegativeCurrencyValue(double amount) throws NegativeCurrencyValueException {
         if (amount < 0)
             throw new NegativeCurrencyValueException("Amount Does not Support Negative Values");
         return false;

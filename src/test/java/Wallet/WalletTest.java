@@ -81,7 +81,7 @@ public class WalletTest {
     }
 
     @Test
-    void testIfAmountEqualToXWhenMoneyAddedNTimes() {
+    void testIfAmountEqualToYWhenMoneyAddedNTimes() {
         Currency rupee1 = new Currency();
         rupee1.setAmount(100);
         rupee1.setType("Rupee");
@@ -97,7 +97,7 @@ public class WalletTest {
         wallet.deposit(dollar);
         wallet.deposit(rupee2);
         double expectedAmountInRupee = 272.74;
-        double expectedAmountInDollar = 3.74;
+        double expectedAmountInDollar = 3.75;
 
         double actualAmountInRupee = wallet.amount("Rupee");
         double actualAmountInDollar = wallet.amount("Dollar");
@@ -137,11 +137,72 @@ public class WalletTest {
         Currency dollar = new Currency();
         dollar.setAmount(0);
         dollar.setType("Dollar");
-        String expectedExceptionMessage = "Minimum Amount To be Deposited : 1";
+        String expectedExceptionMessage = "Minimum Amount To be Deposited Or Withdrawn : 1";
 
         Wallet wallet = new Wallet();
         String actualExceptionMessageOfDollarCurrency = wallet.deposit(dollar);
 
         assertEquals(expectedExceptionMessage, actualExceptionMessageOfDollarCurrency);
     }
+
+    @Test
+    void testIfMoneyIsWithDrawnFromWallet() {
+        Currency depositAmount = new Currency();
+        depositAmount.setAmount(200);
+        depositAmount.setType("Rupees");
+        Currency withdrawAmount = new Currency();
+        withdrawAmount.setAmount(2);
+        withdrawAmount.setType("Dollar");
+        String expectedWithdrawMessage = "2.0 Dollar is Withdrawn From The wallet";
+
+        Wallet wallet = new Wallet();
+        wallet.deposit(depositAmount);
+        String actualWithdrawMessage = wallet.withdraw(withdrawAmount);
+
+        assertEquals(expectedWithdrawMessage, actualWithdrawMessage);
+    }
+
+    @Test
+    void testThrowsExceptionIfWithdrawAmountGreaterThanAvailableBalance() {
+        Currency depositAmount = new Currency();
+        depositAmount.setAmount(200);
+        depositAmount.setType("Rupee");
+        Currency withdrawAmount = new Currency();
+        withdrawAmount.setAmount(3);
+        withdrawAmount.setType("Dollar");
+        String expectedExceptionMessage = "Available Balance is Not Sufficient";
+
+        Wallet wallet = new Wallet();
+        wallet.deposit(depositAmount);
+        String actualExceptionMessage = wallet.withdraw(withdrawAmount);
+
+        assertEquals(expectedExceptionMessage, actualExceptionMessage);
+    }
+
+    @Test
+    void testThrowsExceptionIfMoneyWithdrawnIsZero() {
+        Currency dollar = new Currency();
+        dollar.setAmount(0);
+        dollar.setType("Dollar");
+        String expectedExceptionMessage = "Minimum Amount To be Deposited Or Withdrawn : 1";
+
+        Wallet wallet = new Wallet();
+        String actualExceptionMessageOfDollarCurrency = wallet.withdraw(dollar);
+
+        assertEquals(expectedExceptionMessage, actualExceptionMessageOfDollarCurrency);
+    }
+
+    @Test
+    void testThrowsExceptionIfWithdrawIsDoneOnAEmptyWallet() {
+        String expectedExceptionMessage = "Available Balance is Not Sufficient";
+        Currency withdrawAmount = new Currency();
+        withdrawAmount.setAmount(100);
+        withdrawAmount.setType("Rupee");
+
+        Wallet wallet = new Wallet();
+        String actualExceptionMessage = wallet.withdraw(withdrawAmount);
+
+        assertEquals(expectedExceptionMessage, actualExceptionMessage);
+    }
+
 }
