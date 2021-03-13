@@ -1,4 +1,4 @@
-package WalletEquality;
+package Wallet;
 
 public class Currency {
     private double amount;

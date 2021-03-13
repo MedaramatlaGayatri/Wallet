@@ -1,6 +1,6 @@
-WalletEquality/NegativeCurrencyValueException.java
- WalletEquality.NegativeCurrencyValueException
-WalletEquality/Currency.java
- WalletEquality.Currency
-WalletEquality/CurrencyEquality.java
- WalletEquality.CurrencyEquality
+Wallet/Currency.java
+ Wallet.Currency
+Wallet/NegativeCurrencyValueException.java
+ Wallet.NegativeCurrencyValueException
+Wallet/Wallet.java
+ Wallet.Wallet

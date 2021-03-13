@@ -1,2 +1,2 @@
-WalletEquality/CurrencyEqualityTest.java
- WalletEquality.CurrencyEqualityTest
+Wallet/WalletTest.java
+ Wallet.WalletTest
