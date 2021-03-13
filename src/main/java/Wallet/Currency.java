@@ -21,7 +21,7 @@ public class Currency {
 
     private boolean checkForNegativeCurrencyValueException(double amount) throws NegativeCurrencyValueException {
         if (amount < 0)
-            throw new NegativeCurrencyValueException("Currency Does not Support Negative Values");
+            throw new NegativeCurrencyValueException("Amount Does not Support Negative Values");
         return false;
     }
 

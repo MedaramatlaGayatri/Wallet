@@ -51,8 +51,8 @@ public class WalletTest {
     }
 
     @Test
-    void testCurrencyThrowsExceptionIfNegative() {
-        String expectedExceptionMessage = "Currency Does not Support Negative Values";
+    void testThrowsExceptionIfAmountIsNegative() {
+        String expectedExceptionMessage = "Amount Does not Support Negative Values";
         Currency rupee = new Currency();
         Currency dollar = new Currency();
 
@@ -69,15 +69,15 @@ public class WalletTest {
         rupee.setAmount(100);
         rupee.setType("Rupee");
         Wallet wallet = new Wallet();
-        wallet.add(rupee);
+        wallet.deposit(rupee);
         double expectedAmountInRupee = 100;
         double expectedAmountInDollar = 1.37;
 
         double actualAmountInRupee = wallet.amount("Rupee");
         double actualAmountInDollar = wallet.amount("Dollar");
 
-        assertEquals(expectedAmountInRupee,actualAmountInRupee);
-        assertEquals(expectedAmountInDollar,actualAmountInDollar);
+        assertEquals(expectedAmountInRupee, actualAmountInRupee);
+        assertEquals(expectedAmountInDollar, actualAmountInDollar);
     }
 
     @Test
@@ -93,17 +93,17 @@ public class WalletTest {
         rupee2.setType("Rupee");
 
         Wallet wallet = new Wallet();
-        wallet.add(rupee1);
-        wallet.add(dollar);
-        wallet.add(rupee2);
+        wallet.deposit(rupee1);
+        wallet.deposit(dollar);
+        wallet.deposit(rupee2);
         double expectedAmountInRupee = 272.74;
         double expectedAmountInDollar = 3.74;
 
         double actualAmountInRupee = wallet.amount("Rupee");
         double actualAmountInDollar = wallet.amount("Dollar");
 
-        assertEquals(expectedAmountInRupee,actualAmountInRupee);
-        assertEquals(expectedAmountInDollar,actualAmountInDollar);
+        assertEquals(expectedAmountInRupee, actualAmountInRupee);
+        assertEquals(expectedAmountInDollar, actualAmountInDollar);
     }
 
     @Test
@@ -115,7 +115,33 @@ public class WalletTest {
         double actualAmountInRupee = wallet.amount("Rupee");
         double actualAmountInDollar = wallet.amount("Dollar");
 
-        assertEquals(expectedAmountInRupee,actualAmountInRupee);
-        assertEquals(expectedAmountInDollar,actualAmountInDollar);
+        assertEquals(expectedAmountInRupee, actualAmountInRupee);
+        assertEquals(expectedAmountInDollar, actualAmountInDollar);
+    }
+
+    @Test
+    void testIfMoneyIsAddedToWallet() {
+        Currency rupee = new Currency();
+        rupee.setAmount(50.1);
+        rupee.setType("Rupee");
+        String expectedDepositMessage = "50.1 Rupee is Deposited Into The Wallet";
+
+        Wallet wallet = new Wallet();
+        String actualDepositMessage = wallet.deposit(rupee);
+
+        assertEquals(expectedDepositMessage, actualDepositMessage);
+    }
+
+    @Test
+    void testThrowsExceptionIfMoneyDepositedIsZero() {
+        Currency dollar = new Currency();
+        dollar.setAmount(0);
+        dollar.setType("Dollar");
+        String expectedExceptionMessage = "Minimum Amount To be Deposited : 1";
+
+        Wallet wallet = new Wallet();
+        String actualExceptionMessageOfDollarCurrency = wallet.deposit(dollar);
+
+        assertEquals(expectedExceptionMessage, actualExceptionMessageOfDollarCurrency);
     }
 }

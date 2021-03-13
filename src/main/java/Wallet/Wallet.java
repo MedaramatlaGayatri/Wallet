@@ -40,8 +40,24 @@ public class Wallet {
         return null;
     }
 
-    public void add(Currency currency) {
-        currencyList.add(currency);
+    private boolean checkForZeroDepositException(Currency currency) throws ZeroDepositException {
+        if (currency.getAmount() == 0.0)
+            throw new ZeroDepositException("Minimum Amount To be Deposited : 1");
+        return false;
+    }
+
+    public String deposit(Currency currency) {
+        try {
+            if (!checkForZeroDepositException(currency)) {
+                currencyList.add(currency);
+                return currencyList.get(currencyList.size() - 1).getAmount() + " "
+                        + currencyList.get(currencyList.size() - 1).getType()
+                        + " is Deposited Into The Wallet";
+            }
+        } catch (ZeroDepositException e) {
+            return e.getMessage();
+        }
+        return "";
     }
 
     public double amount(String currencyType) {
